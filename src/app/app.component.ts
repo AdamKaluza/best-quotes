@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {Quotation} from "./Models/quotation";
+import {QUOTES} from "./Models/databse";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,21 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'best-quotes';
+  showForm = false;
+
+  quotes: Quotation[] = QUOTES;
+  quotation: Quotation = {author: '', sentence: '', votes: 0};
+  onSwitchForm(): void {
+    this.showForm = !this.showForm;
+  }
+
+  addQuotation() {
+    this.quotes.unshift(this.quotation);
+    this.quotation = {author: '', sentence: '',votes: 0};
+  }
+
+  addVote(quotation: Quotation, value: number) {
+    quotation.votes += value;
+  }
+
 }
